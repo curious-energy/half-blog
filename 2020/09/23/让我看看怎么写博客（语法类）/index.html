@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      154 字
+      168 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      2
        分钟
     </span>
   
@@ -221,7 +221,8 @@
             
             <div class="markdown-body" id="post-body">
               <pre><code class="hljs markdown">hexo clean &amp;&amp; hexo g # 清理缓存生成文件
-hexo d # 部署文档</code></pre>
+hexo d # 部署文档
+hexo s # 本地测试</code></pre>
 
 <p><code>列表：</code></p>
 <ol>
@@ -230,8 +231,7 @@ hexo d # 部署文档</code></pre>
 <li>事业</li>
 </ol>
 <ul>
-<li>点</li>
-<li>点</li>
+<li>点 <code>-</code></li>
 </ul>
 <pre><code class="hljs markdown">&#123;% note primary %&#125;
 这里可以写文字 或者 <span class="hljs-code">`markdown`</span>
@@ -249,19 +249,20 @@ hexo d # 部署文档</code></pre>
             <p>这里可以写文字 或者 <code>markdown</code></p>
           </div>
 
-<span class="label label-primary">行内标签</span>`<span class="label label-primary">行内标签</span>`
+<span class="label label-primary">行内标签</span>
+<pre><code class="hljs markdown">&#123;% label primary @行内标签 %&#125;</code></pre>
 
 <div>
             <input type="checkbox" disabled checked="checked">主要是解决一些 Renderer 不支持勾选
           </div>
+<pre><code class="hljs markdown">&#123;% cb 主要是解决一些 Renderer 不支持勾选, true %&#125;</code></pre>
 
-<p><code>&#123;% cb 主要是解决一些 Renderer 不支持勾选, true %&#125;</code></p>
-<a class="btn" href="javascript:;"  target="_blank">支持链接</a> `<a class="btn" href="javascript:;"  target="_blank">支持链接</a>`
+<a class="btn" href="javascript:;"  target="_blank">支持链接</a> 
+<pre><code class="hljs markdown">&#123;% btn javascript:;, 支持链接 %&#125;</code></pre>
 
 
 
-<p>`</p>
-<p>还要常去翻阅Markdown笔记！<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>脚注演示<br><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:1" class="footnote-text"><span>脚注演示`<br><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section></p>
+<p>还要常去翻阅Markdown笔记！<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>脚注演示<br><pre><code class="hljs markdown">[<span class="hljs-symbol">^1</span>]: <span class="hljs-link">脚注演示</span></code></pre><br><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section></p>
 
             </div>
             <hr>
