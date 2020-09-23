@@ -4,12 +4,45 @@
   
   
   <entry>
+    <title>让我看看怎么写博客（语法类）</title>
+    <link href="/2020/09/23/%E8%AE%A9%E6%88%91%E7%9C%8B%E7%9C%8B%E6%80%8E%E4%B9%88%E5%86%99%E5%8D%9A%E5%AE%A2%EF%BC%88%E8%AF%AD%E6%B3%95%E7%B1%BB%EF%BC%89/"/>
+    <url>/2020/09/23/%E8%AE%A9%E6%88%91%E7%9C%8B%E7%9C%8B%E6%80%8E%E4%B9%88%E5%86%99%E5%8D%9A%E5%AE%A2%EF%BC%88%E8%AF%AD%E6%B3%95%E7%B1%BB%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<pre><code class="hljs markdown">hexo clean &amp;&amp; hexo g # 清理缓存生成文件hexo d # 部署文档</code></pre><p><code>列表：</code></p><ol><li>健康</li><li>幸福</li><li>事业</li></ol><ul><li>点</li><li>点</li></ul><pre><code class="hljs markdown">&#123;% note primary %&#125;这里可以写文字 或者 <span class="hljs-code">`markdown`</span>&#123;% endnote %&#125;&#123;% note warning %&#125;这里可以写文字 或者 <span class="hljs-code">`markdown`</span>&#123;% endnote %&#125;&#123;% note danger %&#125;这里可以写文字 或者 <span class="hljs-code">`markdown`</span>&#123;% endnote %&#125;</code></pre><div class="note note-primary">            <p>这里可以写文字 或者 <code>markdown</code></p>          </div><span class="label label-primary">行内标签</span>`<span class="label label-primary">行内标签</span>`<div>            <input type="checkbox" disabled checked="checked">主要是解决一些 Renderer 不支持勾选          </div><p><code>&#123;% cb 主要是解决一些 Renderer 不支持勾选, true %&#125;</code></p><a class="btn" href="javascript:;"  target="_blank">支持链接</a> `<a class="btn" href="javascript:;"  target="_blank">支持链接</a>`<p>`</p><p>还要常去翻阅Markdown笔记！<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>脚注演示<br><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:1" class="footnote-text"><span>脚注演示`<br><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Markdown</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>MD</tag>
+      
+      <tag>Fluid</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>为什么要建博客</title>
     <link href="/2020/09/23/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
     <url>/2020/09/23/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
     
     <content type="html"><![CDATA[<h1 id="建立博客的初衷"><a href="#建立博客的初衷" class="headerlink" title="建立博客的初衷"></a>建立博客的初衷</h1><p>以前建立博客可能只是为了好玩，为了有个对网络的好奇。 但是之后的不断建站也是看到了大佬们的经验分享的必要，不一定要写的多好，但是可以记录自己的一些问题，就很好了。</p><a id="more"></a><p>这算是我第三次折腾这个了吧，希望以后就不要在折腾了，也别放弃了，简简单单做个记录，此次网站已经足够了。</p><p>第一次（2018）我作为一个小白，发现建立一个博客也很简单，我就着手尝试进行了轰轰烈烈的建站活动，然后也找了官方的例程和其他伙伴的博客进行学习、模仿。作为一个体验还可以的，但是实际做出来的效果差强人意，虽然也受到了陌生好友的鼓励，但是自己实在受不了了，后面随着换电脑就放弃了。</p><p>第二次（2020.2）第一次的经历确实不太好，那时各种插件还不是那么人性化，给我留下不好的印象。先说第二次，受到Markdeep的启发，我觉得这样做或许很容易，结果还是不是那么容易，但是网站几乎达到了自己的要求，也算可以，还做了一个总结发在了知乎上面。</p><p>第三次（2020.9）这时我又换了电脑，也经过一个月的尝试，到了linux环境下进行工作学习，这时候我又萌发了写记录文章的念头。每天查的问题和总结的文献，解决的方案很多很多，昨天做的工作今天要用到，就已经忘光了。这个状况让我很是不安，如果很多东西还要不断的重复的话，那会造成我的时间很大的浪费的，我的危机感突然升起。</p><p>建站的初衷（又回来了），如果可以将自己的知识尽可能的记录下来，省下时间可以更多的提升自己。</p><p>记录下来这个心路历程，与大家共勉！！！</p><p>PS:吐槽也是博客的一大乐趣。:-D</p>]]></content>
     
+    
+    <categories>
+      
+      <category>随笔</category>
+      
+    </categories>
     
     
     <tags>
