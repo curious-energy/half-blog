@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>Ubuntu开机运行程序</title>
+    <link href="/2020/09/24/unbuntu%E5%BC%80%E6%9C%BA%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/"/>
+    <url>/2020/09/24/unbuntu%E5%BC%80%E6%9C%BA%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</url>
+    
+    <content type="html"><![CDATA[<p>作为开机启动项的记录，用来对比进程。</p><pre><code class="hljs bash"> PID TTY          TIME CMD1290 tty1     00:00:02 Xorg1317 tty1     00:00:00 gnome-session-b1349 tty1     00:00:02 gnome-shell2065 tty1     00:00:00 ibus-daemon2068 tty1     00:00:00 ibus-dconf2071 tty1     00:00:00 ibus-x112147 tty1     00:00:00 gsd-xsettings2150 tty1     00:00:00 gsd-a11y-settin2151 tty1     00:00:00 gsd-clipboard2153 tty1     00:00:00 gsd-color2154 tty1     00:00:00 gsd-datetime2157 tty1     00:00:00 gsd-housekeepin2160 tty1     00:00:00 gsd-keyboard2163 tty1     00:00:00 gsd-media-keys2167 tty1     00:00:00 gsd-mouse2169 tty1     00:00:00 gsd-power2177 tty1     00:00:00 gsd-print-notif2179 tty1     00:00:00 gsd-rfkill2181 tty1     00:00:00 gsd-screensaver2196 tty1     00:00:00 gsd-sharing2197 tty1     00:00:00 gsd-smartcard2201 tty1     00:00:00 gsd-sound2210 tty1     00:00:00 gsd-wacom2275 tty1     00:00:00 ibus-engine-sim2382 tty2     00:00:12 Xorg2394 tty2     00:00:00 gnome-session-b2522 tty2     00:00:28 gnome-shell2563 tty2     00:00:00 ibus-daemon2567 tty2     00:00:00 ibus-dconf2569 tty2     00:00:00 ibus-x112647 tty2     00:00:00 gsd-power2648 tty2     00:00:00 gsd-print-notif2651 tty2     00:00:00 gsd-rfkill2653 tty2     00:00:00 gsd-screensaver2654 tty2     00:00:00 gsd-sharing2657 tty2     00:00:00 gsd-xsettings2662 tty2     00:00:00 gsd-wacom2664 tty2     00:00:00 gsd-smartcard2665 tty2     00:00:00 gsd-sound2677 tty2     00:00:00 gsd-a11y-settin2680 tty2     00:00:00 gsd-clipboard2685 tty2     00:00:00 gsd-color2690 tty2     00:00:00 gsd-datetime2695 tty2     00:00:00 gsd-housekeepin2696 tty2     00:00:00 gsd-keyboard2699 tty2     00:00:00 gsd-media-keys2701 tty2     00:00:00 gsd-mouse2727 tty2     00:00:00 gsd-printer2764 tty2     00:00:01 nautilus-deskto2766 tty2     00:00:00 indicator-sysmo2767 tty2     00:00:00 gsd-disk-utilit2831 tty2     00:00:00 python2847 tty2     00:00:00 ibus-engine-lib3875 tty2     00:00:00 update-notifier3878 tty2     00:00:01 gnome-software5174 pts/0    00:00:00 sudo5178 pts/0    00:00:00 ps</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>linux</tag>
+      
+      <tag>ubuntu</tag>
+      
+      <tag>ps</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>给我的嘉瑛</title>
     <link href="/2020/09/23/MyLove/"/>
     <url>/2020/09/23/MyLove/</url>
