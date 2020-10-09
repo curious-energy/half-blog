@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="XIN LI">
   <meta name="keywords" content="">
-  <title>视觉目标跟踪入门 - 记忆碎片</title>
+  <title>AirSim的api接口 - 记忆碎片</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -177,8 +177,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-09-24 11:00" pubdate>
-        2020年9月24日 上午
+      <time datetime="2020-09-29 15:10" pubdate>
+        2020年9月29日 下午
       </time>
     </span>
   
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      22
        分钟
     </span>
   
@@ -229,124 +229,131 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">视觉目标跟踪入门</h1>
+            <h1 style="display: none">AirSim的api接口</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>看看这次多久能入门 2020-09-24-11</p>
-<a id="more"></a>
-
-<p>值得参考的文章：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38128100/article/details/88343771?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.channel_param&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.channel_param#commentBox">https://blog.csdn.net/weixin_38128100/article/details/88343771?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.channel_param&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.channel_param#commentBox</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17783559/article/details/82020940?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.channel_param&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.channel_param#commentBox">https://blog.csdn.net/qq_17783559/article/details/82020940?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.channel_param&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.channel_param#commentBox</a></p>
-<h4 id="跟踪算法要克服的问题"><a href="#跟踪算法要克服的问题" class="headerlink" title="跟踪算法要克服的问题"></a>跟踪算法要克服的问题</h4><p>形态变化</p>
-<p>尺度变化</p>
-<p>遮挡与消失</p>
-<p>光照强度变化，低分辨率，目标快速移动</p>
-<h3 id="模型分类"><a href="#模型分类" class="headerlink" title="模型分类"></a>模型分类</h3><h4 id="针对目标建模跟踪-（生成模型）"><a href="#针对目标建模跟踪-（生成模型）" class="headerlink" title="针对目标建模跟踪 （生成模型）"></a>针对目标建模跟踪 （生成模型）</h4><p>代表算法有：粒子滤波、光流法、Meanshift算法、Camshift</p>
-<p>利用目标的<code>特征</code>进行跟踪，对后续存在的相似目标进行搜寻，找到类似的目标迭代实现目标的定位</p>
-<p><code>我认为这些是经典算法的意义在于总体的框架构思，这是难以改变的，如果可以突破，那你便是开创了新领域</code></p>
-<p>可以改进的点：</p>
-<ol>
-<li>如果特征采集做的不是很好的话，可能会对后续目标识别影响很大</li>
-<li>加入有效的目标位置预测信息</li>
-</ol>
-<h4 id="考虑目标与背景信息的差异-（鉴别模型）"><a href="#考虑目标与背景信息的差异-（鉴别模型）" class="headerlink" title="考虑目标与背景信息的差异 （鉴别模型）"></a>考虑目标与背景信息的差异 （鉴别模型）</h4><p>很明显，这里就是对框架的革新，属于<code>反向思维</code></p>
-<p>经常受到背景信息的干扰，那不如把这部分信息也有效的利用进来。</p>
-<p>主要两个方向：</p>
-<ol>
-<li>滤波 2014-2015</li>
-<li>深度学习 2015 - </li>
-</ol>
-<h5 id="相关滤波算法"><a href="#相关滤波算法" class="headerlink" title="相关滤波算法"></a>相关滤波算法</h5><ol>
-<li>特征选择 -  单一特征 多个特征</li>
-</ol>
-<p>单特征：比如MOSSE采用的是灰度特征，达到了很高的跟踪速度</p>
-<p>多特征：多个特征进行矢量链接结合，HOG+颜色直方图 or 多个颜色通道的HOG</p>
-<ul>
-<li>深度学习卷积提取特征</li>
+              <p>原链接：<br><a target="_blank" rel="noopener" href="https://microsoft.github.io/AirSim/apis/#common-apis">https://microsoft.github.io/AirSim/apis/#common-apis</a><br>(下文为原文谷歌翻译)</p>
+<h1 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h1><ul>
+<li><code>reset</code>:这将车辆重置为其原始启动状态。请注意，必须在调用重置后再次调用<code>enableApiControl</code>和<code>armDisarm</code>。</li>
+<li><code>ConfirmConnection</code>：每1秒检查一次连接状态，并在控制台中报告该状态，以便用户可以查看连接进度。</li>
+<li><code>enableApiControl</code>：出于安全原因，默认情况下不会启用对自动驾驶汽车的API控制，并且操作员具有完全控制权（通常通过RC或模拟器中的操纵杆）。客户端必须进行此调用才能通过API请求控制。车辆的操作员可能禁止了API控制，这意味着<code>enableApiControl</code>不起作用。可以通过检查<code>isApiControlEnabled</code>。</li>
+<li><code>isApiControlEnabled</code>：如果建立了API控件，则返回true。如果为false（默认设置），则将忽略API调用。成功调用后<code>enableApiControl</code>，<code>isApiControlEnabled</code>应当返回true。</li>
+<li><code>ping</code>：如果建立了连接，则此调用将返回true，否则它将被阻止直到超时。</li>
+<li><code>simPrintLogMessage</code>：在模拟器的窗口中打印指定的消息。如果还提供了message_param，则将其打印在消息旁边，在这种情况下，如果使用相同的消息值但又使用不同的message_param调用此API，则前一行将用新行覆盖（而不是API在显示时创建新行）。例如，<code>simPrintLogMessage(&quot;Iteration: &quot;, to_string(i))</code>当使用不同的i值调用API时，将不断更新显示的同一行。严重性参数的有效值为0到3（含0和3），分别对应于不同的颜色。</li>
+<li><code>simGetObjectPose</code>，<code>simSetObjectPose</code>：获取并设置虚幻环境中指定对象的姿势。这里的对象在虚幻的术语中指的是“演员”。它们通过标签和名称进行搜索。请注意，UE编辑器中显示的名称在每次运行时都会自动生成，并且不是永久的。因此，如果要按名称引用actor，则必须在UE Editor中更改其自动生成的名称。另外，您可以向演员添加标签，方法是在虚幻编辑器中单击该演员，然后转到“标签”属性，单击“ +”号并添加一些字符串值。如果多个演员具有相同的标签，则返回第一个匹配项。如果找不到匹配项，则返回NaN pose。返回的姿势在NED坐标中以SI单位表示，其原点在“播放器开始”处。对于<code>simSetObjectPose</code>，则指定的actor必须将Mobility设置为Movable，否则您将获得未定义的行为。该<code>simSetObjectPose</code>具有的参数<code>teleport</code>，这意味着对象通过其他物体移动在它的方式，如果此举成功，就返回true</li>
 </ul>
-<p>提取特征：例如HOG可以描述表面纹理特征和轮廓形状</p>
-<p>提高速度，采用PCA降维</p>
-<ol start="2">
-<li>尺度估计 - 简单说就是为了适应目标的大小变化</li>
-</ol>
-<p>我觉得SIFT里面的特征金字塔已经达到很好的水平了</p>
-<p>基于分块的方法，这个思想值得考量：计算各个组件之间的距离，来判断放缩。</p>
-<p>当然，后续提出的不同模型要怎么分块就是更为细致的思考了。</p>
-<p>进一步，利用特征点对来进行尺度放缩的判断也是很妙的想法，减少了很多工作。</p>
-<p><code>我回想我最近看到的这些深度学习的论文，比如YOLOv3,他们对目标的尺寸也是颇有考量的，说明尺寸这里的工作很重要，如果对物体的旋转和尺寸变化很鲁棒，那必是一个不错的算法</code></p>
-<p><code>YOLOv3,算法要针对识别的图像目标，进行计算候选框的最佳尺寸，用的是所有数据的统计结果，这个我认为也是这个算法准确率很高的原因，但是相比RCNN系列，他是在预处理阶段就完成了，莫名奇妙的偷了一点时间出来，哈哈，不过凡是都是有代价的，很明显，YOLO的识别准确率降低了</code></p>
-<p><code>说到这里，我更为抽象化的理解，就是所有的算法在同一个理论框架中都是有局限性的，很多的算法与其说是在改进算法，更不如说是取得了更好的trade off,保持生活的平衡，朋友 or </code></p>
+<h1 id="图像-计算机视觉API"><a href="#图像-计算机视觉API" class="headerlink" title="图像/计算机视觉API"></a>图像/计算机视觉API</h1><p>AirSim提供了全面的图像API，可从多个摄像机检索同步图像以及地面真实情况，包括<code>深度</code>，<code>视差</code>，<code>表面法线</code>和<code>视觉</code>。您可以在settings.json中设置分辨率，FOV，运动模糊等参数。还有用于检测碰撞状态的API。另请参见完整代码，该代码生成特定数量的立体图像和地面真相深度，并根据相机计划进行标准化，计算视差图像并将其保存为pfm格式。</p>
+<pre><code class="hljs json">&#123;
+  <span class="hljs-attr">&quot;SettingsVersion&quot;</span>: <span class="hljs-number">1.2</span>,
+  <span class="hljs-attr">&quot;CameraDefaults&quot;</span>: &#123;
+      <span class="hljs-attr">&quot;CaptureSettings&quot;</span>: [
+        &#123;
+          <span class="hljs-attr">&quot;ImageType&quot;</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-attr">&quot;Width&quot;</span>: <span class="hljs-number">256</span>,
+          <span class="hljs-attr">&quot;Height&quot;</span>: <span class="hljs-number">144</span>,
+          <span class="hljs-attr">&quot;FOV_Degrees&quot;</span>: <span class="hljs-number">90</span>,
+          <span class="hljs-attr">&quot;AutoExposureSpeed&quot;</span>: <span class="hljs-number">100</span>,
+          <span class="hljs-attr">&quot;MotionBlurAmount&quot;</span>: <span class="hljs-number">0</span>
+        &#125;
+    ]
+  &#125;,
+  <span class="hljs-attr">&quot;SimMode&quot;</span>: <span class="hljs-string">&quot;ComputerVision&quot;</span>
+&#125;</code></pre>
+
+
+
+<h1 id="暂停和继续API"><a href="#暂停和继续API" class="headerlink" title="暂停和继续API"></a>暂停和继续API</h1><p>AirSim允许通过<code>pause(is_paused)API</code>暂停并继续仿真。暂停模拟通话<code>pause(True)</code>并继续模拟通话<code>pause(False)</code>。您可能会遇到一些情况，尤其是在使用强化学习时，要在指定的时间量内运行模拟，然后自动暂停。暂停模拟后，您可能需要执行一些昂贵的计算，发送新命令，然后在指定的时间内再次运行模拟。这可以通过API实现continueForTime(seconds)。此API在指定的秒数内运行模拟，然后暂停模拟。有关用法示例，请参见pause_continue_car.py和pause_continue_drone.py。</p>
+<h1 id="碰撞API"><a href="#碰撞API" class="headerlink" title="碰撞API"></a>碰撞API</h1><p>可以使用<code>simGetCollisionInfo</code>API获取冲突信息。该调用返回一个结构，该结构不仅具有是否发生碰撞的信息，而且还具有碰撞位置，表面法线和穿透深度等信息。</p>
+<h1 id="时段API"><a href="#时段API" class="headerlink" title="时段API"></a>时段API</h1><p>AirSim假设类的存在天空球EngineSky/BP_Sky_Sphere在你的环境中ADirectionalLight演员。默认情况下，场景中太阳的位置不会随时间移动。您可以使用设置设置AirSim用于计算场景中太阳位置的纬度，经度，日期和时间。</p>
+<p>您还可以使用以下API调用根据给定的日期时间设置太阳的位置：</p>
+<pre><code class="hljs python">simSetTimeOfDay(self, is_enabled, start_datetime = <span class="hljs-string">&quot;&quot;</span>, is_start_datetime_dst = <span class="hljs-literal">False</span>, celestial_clock_speed = <span class="hljs-number">1</span>, update_interval_secs = <span class="hljs-number">60</span>, move_sun = <span class="hljs-literal">True</span>)
+</code></pre>
+<p>该<code>is_enabled</code>参数必须是<code>True</code>启用一天中的时间效果。如果是，<code>False</code>则在环境中将太阳位置重置为其原始位置。</p>
+<h1 id="天气API"><a href="#天气API" class="headerlink" title="天气API"></a>天气API</h1><p>默认情况下，所有天气影响都是禁用的。要启用天气效果，请先call：</p>
 <blockquote>
-<p>天之道，损有余而补不足。人之道，则不然，损不足以奉有余。孰能有余以奉天下？唯有道者。</p>
+<p>simEnableWeather(True)</p>
 </blockquote>
-<p>》 更为重要的，论文不能说自己最好，绝对有漏洞，或者能达到满足实际的简单需求而已。</p>
-<p><code>回想现在火热的人工智能，常常被吹的神乎其神，内行人都知道，这不过仅仅是开了一条缝的门而已。</code></p>
-<ol>
-<li>分类器的模型 - </li>
-</ol>
-<p>相关研究刚开始是对相关滤波方法的改进。</p>
-<ol>
-<li>对搜索区域进行优化，加入正则化约束</li>
-<li>学习率优化，自适应函数</li>
-<li>结合相关滤波的循环矩阵更新过程，多个峰值停止更新，增加判断机制</li>
-<li>在线检测机制，设置阈值来判断更新过程的可靠程度</li>
-</ol>
-<h3 id="深度学习下的跟踪方法"><a href="#深度学习下的跟踪方法" class="headerlink" title="深度学习下的跟踪方法"></a>深度学习下的跟踪方法</h3><p>可以说这个是不同于上述的算法框架的。</p>
-<p>端到端，以大数据来引领算法是这个领域的主要特征。</p>
-<p>没有数据，何以谈深度学习，庆幸的是这个时代最不缺的就是数据，未发掘的数据巨大！</p>
-<p><code>进入正题，基于CNN对特征进行提取。</code></p>
-<ol>
-<li>对相关滤波方法进行改进，利用不同层卷积提取的特征信息来训练相关滤波器。</li>
-<li>DeepSRDCF建立单层神经网络来减少深度特征的计算量</li>
-<li>C-COT 连续卷积滤波器，连续空间域差值转换，输入不同分辨率特征</li>
-<li>ECO进一步改进，去除贡献小的滤波器，降低维度；6帧更新一次，可减少计算和减轻目标遮挡带来的影响（躲避困难的胜利？）</li>
-<li>SiamFC 孪生网络思想</li>
-</ol>
+<p>各种天气的影响可通过使用启用simSetWeatherParameter方法，该方法采用WeatherParameter，例如，</p>
 <blockquote>
-<p>Bertinetto L, Valmadre J, Henriques J F, Vedaldi A, Torr P<br>H S. Fully-convolutional siamese networks for object track-<br>ing. In: Proceedings of Computer Vision. Lecture Notes<br>in Computer Science, vol. 9914. Amsterdam, Netherlands: Springer, 2016. 850-865</p>
+<p>client.simSetWeatherParameter(airsim.WeatherParameter.Rain, 0.25);</p>
 </blockquote>
-<ol start="6">
-<li>DLT 使用判断相似性来更新阈值的方法来进行网络更新。但是要是出现目标和目标混乱情况时会出现一直更新，实时性变差</li>
-</ol>
+<p>第二个参数值是从0到1。第一个参数提供以下选项：</p>
+<pre><code class="hljs python">
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WeatherParameter</span>:</span>
+    Rain = <span class="hljs-number">0</span>
+    Roadwetness = <span class="hljs-number">1</span>
+    Snow = <span class="hljs-number">2</span>
+    RoadSnow = <span class="hljs-number">3</span>
+    MapleLeaf = <span class="hljs-number">4</span>
+    RoadLeaf = <span class="hljs-number">5</span>
+    Dust = <span class="hljs-number">6</span>
+    Fog = <span class="hljs-number">7</span></code></pre>
+<p>请注意<code>Roadwetness</code>，<code>RoadSnow</code>和<code>RoadLeaf</code>效果需要向场景添加材质。</p>
+<h1 id="多无人机"><a href="#多无人机" class="headerlink" title="多无人机"></a>多无人机</h1><pre><code class="hljs json">&#123;
+    <span class="hljs-attr">&quot;SettingsVersion&quot;</span>: <span class="hljs-number">1.2</span>,
+    <span class="hljs-attr">&quot;SimMode&quot;</span>: <span class="hljs-string">&quot;Multirotor&quot;</span>,
+
+    <span class="hljs-attr">&quot;Vehicles&quot;</span>: &#123;
+        <span class="hljs-attr">&quot;Drone1&quot;</span>: &#123;
+          <span class="hljs-attr">&quot;VehicleType&quot;</span>: <span class="hljs-string">&quot;SimpleFlight&quot;</span>,
+          <span class="hljs-attr">&quot;X&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">&quot;Y&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">&quot;Z&quot;</span>: <span class="hljs-number">-2</span>,
+      <span class="hljs-attr">&quot;Yaw&quot;</span>: <span class="hljs-number">-180</span>
+        &#125;,
+        <span class="hljs-attr">&quot;Drone2&quot;</span>: &#123;
+          <span class="hljs-attr">&quot;VehicleType&quot;</span>: <span class="hljs-string">&quot;SimpleFlight&quot;</span>,
+          <span class="hljs-attr">&quot;X&quot;</span>: <span class="hljs-number">8</span>, <span class="hljs-attr">&quot;Y&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">&quot;Z&quot;</span>: <span class="hljs-number">-2</span>
+        &#125;
+
+    &#125;
+&#125;
+</code></pre>
+
+<h1 id="图片API"><a href="#图片API" class="headerlink" title="图片API"></a>图片API</h1><h2 id="获取单个图像"><a href="#获取单个图像" class="headerlink" title="获取单个图像"></a>获取单个图像</h2><pre><code class="hljs python"><span class="hljs-keyword">import</span> airsim <span class="hljs-comment">#pip install airsim</span>
+
+client = airsim.MultirotorClient()
+
+png_image = client.simGetImage(<span class="hljs-string">&quot;0&quot;</span>, airsim.ImageType.Scene)</code></pre>
+
+<h2 id="更加强大的"><a href="#更加强大的" class="headerlink" title="更加强大的"></a>更加强大的</h2><p>例如，您可以在一个API调用中从左摄像机获取左摄像机视图，右摄像机视图和深度图像。</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> airsim <span class="hljs-comment">#pip install airsim</span>
+
+client = airsim.MultirotorClient()
+
+responses = client.simGetImages([
+    <span class="hljs-comment"># png format</span>
+    airsim.ImageRequest(<span class="hljs-number">0</span>, airsim.ImageType.Scene), 
+    <span class="hljs-comment"># uncompressed RGB array bytes</span>
+    airsim.ImageRequest(<span class="hljs-number">1</span>, airsim.ImageType.Scene, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>),
+    <span class="hljs-comment"># floating point uncompressed image</span>
+    airsim.ImageRequest(<span class="hljs-number">1</span>, airsim.ImageType.DepthPlanner, <span class="hljs-literal">True</span>)])
+
+ <span class="hljs-comment"># do something with response which contains image data, pose, timestamp etc</span></code></pre>
+
+<h2 id="通过NumPy使用AirSim图像"><a href="#通过NumPy使用AirSim图像" class="headerlink" title="通过NumPy使用AirSim图像"></a>通过NumPy使用AirSim图像</h2><p>如果计划使用numpy进行图像处理，则应获取未压缩的RGB图像，然后将其转换为numpy，如下所示：</p>
+<pre><code class="hljs python">responses = client.simGetImages([airsim.ImageRequest(<span class="hljs-string">&quot;0&quot;</span>, airsim.ImageType.Scene, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>)])
+response = responses[<span class="hljs-number">0</span>]
+
+<span class="hljs-comment"># get numpy array</span>
+img1d = np.fromstring(response.image_data_uint8, dtype=np.uint8) 
+
+<span class="hljs-comment"># reshape array to 4 channel image array H X W X 4 (这里怀疑采集有误，可能是针对的是RGB-D图像)</span>
+img_rgb = img1d.reshape(response.height, response.width, <span class="hljs-number">3</span>)
+
+<span class="hljs-comment"># original image is fliped vertically</span>
+img_rgb = np.flipud(img_rgb)
+
+<span class="hljs-comment"># write to png </span>
+airsim.write_png(os.path.normpath(filename + <span class="hljs-string">&#x27;.png&#x27;</span>), img_rgb)</code></pre>
+
+<p><code>其他提示</code>：</p>
 <blockquote>
-<p>Wang N Y, Yeung D Y. Learning a deep compact image<br>representation for visual tracking. In: Proceedings of the<br>26th International Conference on Neural Information Pro-<br>cessing Systems. Lake Tahoe, Nevada: Curran Associates<br>Inc., 2013. 809-817</p>
+<p><code>APIsimGetImage</code>返回<code>binary string literal</code>，这意味着您可以简单地将其转储为二进制文件以创建.png文件。但是，如果您希望以方便的功能之外的其他方式处理它<code>airsim.string_to_uint8_array</code>。这会将二进制字符串文字转换为NumPy uint8数组。<br><code>APIsimGetImages</code>可以在一次调用中接受来自任何摄像机的多种图像类型的请求。您可以指定图像是png压缩，RGB未压缩还是float数组。对于png压缩图像，您得到<code>binary string literal</code>。对于float数组，您将获得float64的Python列表。您可以使用以下方法将此float数组转换为NumPy 2D数组</p>
 </blockquote>
-<ol start="7">
-<li>将高斯函数引入到卷积神将网络中训练中,来提高深度特征提取的精度？</li>
-</ol>
+<pre><code class="hljs python">airsim.list_to_2d_float_array(response.image_data_float, response.width, response.height)
+</code></pre>
 <blockquote>
-<p>Ding J W, Huang Y Z, Liu W, Huang K Q. Severely<br>blurred object tracking by learning deep image representa-<br>tions. IEEE Transactions on Circuits and Systems for Video<br>Technology, 2016, 26(2): 319-331</p>
+<p>您也可以使用<code>airsim.write_pfm()</code>函数将浮点数组保存为.pfm文件（便携式浮点图格式）。</p>
 </blockquote>
-<ol start="8">
-<li>对不同的网络层次合理采用来获取不同层次的特征，有效的过滤干扰噪声 <code>让我想到了Unet++，思想框架如出一致。</code></li>
-</ol>
-<blockquote>
-<p>Dai L, Zhu Y S, Luo G B, He C. A low-complexity visual<br>tracking approach with single hidden layer neural networks.<br>In: Proceedings of the 13th International Conference on<br>Control Automation Robotics and Vision. Singapore: IEEE, 2014. 810-814</p>
-</blockquote>
-<ol start="9">
-<li>神经网络树？？？77</li>
-</ol>
-<blockquote>
-<p>Nam H, Baek M, Han B. Modeling and propagating CNNs<br>in a tree structure for visual tracking. In: Proceedings of<br>the 2016 IEEE Conference on Computer Vision and Pat-<br>tern Recognition. Las Vegas, USA: IEEE, 2016. 2137-2155</p>
-</blockquote>
-<ol start="10">
-<li>正负样本不平衡 - 生成对抗网络丰富样本系列，数据增强都可以考虑这个模型。</li>
-<li>高阶敏感损失？？？ </li>
-</ol>
-<blockquote>
-<p>Song Y B, Ma C, Wu X H, Gong L J, Bao L C, Zuo W M, et<br>al. Visual tracking via adversarial learning. In: Proceedings<br>of the 2018 IEEE Conference on Computer Vision and Pat-<br>tern Recognition. Salt Lake City, Utah, USA: IEEE, 2018. 1084-1093</p>
-</blockquote>
-<p>截止2018，实验效果不错的是ECO</p>
-<blockquote>
-<p>一个很神的算法框架：Boost思想，对于提升算法各项能力都很重要。</p>
-</blockquote>
-<h3 id="仅仅是一些无关紧要的"><a href="#仅仅是一些无关紧要的" class="headerlink" title="仅仅是一些无关紧要的"></a>仅仅是一些无关紧要的</h3><p>学到了一个单词，之前用过，但是用错了（原理图，Schematic diagram）</p>
-<p>数据集：<br> OTB-2013</p>
-<p>留待思考：</p>
-<p>深度学习类算法跟踪速度过慢都多都在0.1-5 帧每秒之间,不能达到实时跟踪; 而相关滤波类算法跟踪速度可以达到百帧每秒, 可以对目标实时跟踪.</p>
-<p>问题是出在模型更新机制？</p>
-<p>各方法优势的结合，或者更好的范式吗？</p>
 
             </div>
             <hr>
@@ -356,7 +363,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA/">目标跟踪</a>
+                      <a class="hover-with-bg" href="/categories/%E4%BB%BF%E7%9C%9F/">仿真</a>
                     
                   </div>
                 
@@ -364,9 +371,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%B0%83%E7%A0%94/">调研</a>
+                      <a class="hover-with-bg" href="/tags/AirSim/">AirSim</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%B7%9F%E8%B8%AA/">跟踪</a>
+                      <a class="hover-with-bg" href="/tags/UAVs/">UAVs</a>
                     
                   </div>
                 
@@ -379,18 +386,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/24/YOLO%E6%9C%80%E6%96%B0%E7%B3%BB%E5%88%97%E7%9A%84%E9%98%85%E8%AF%BB%E6%80%9D%E8%80%83/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">YOLO最新系列的阅读思考</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/09/24/%E7%99%BE%E5%BA%A6%E9%A6%96%E6%94%AF%E7%BA%AA%E5%BD%95%E7%89%87%E3%80%8A%E4%BA%8C%E5%8D%81%E5%BA%A6%E3%80%8B/">
-                        <span class="hidden-mobile">百度首支纪录片《二十度》</span>
+                      <a href="/2020/09/27/%E8%A7%86%E8%A7%89%E8%B7%9F%E8%B8%AA20%E5%B9%B4%E3%80%90tracking%E3%80%91/">
+                        <span class="hidden-mobile">目标检测20年【tracking】</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -598,7 +599,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "视觉目标跟踪入门&nbsp;",
+        "AirSim的api接口&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 80,

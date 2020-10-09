@@ -1,0 +1,720 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/cat.png">
+  <link rel="icon" type="image/png" href="/img/cat.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="XIN LI">
+  <meta name="keywords" content="">
+  <title>目标检测20年【tracking】 - 记忆碎片</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_pf9vaxs7x7b.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>记忆碎片</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/love/">
+                <i class="iconfont icon-music"></i>
+                love
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/beach.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-09-27 10:10" pubdate>
+        2020年9月27日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">目标检测20年【tracking】</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h2 id="检测算法指南"><a href="#检测算法指南" class="headerlink" title="检测算法指南"></a>检测算法指南</h2><p>可能只包含了我感兴趣的内容，具体请参见arxiv:1905.05055</p>
+<blockquote>
+<p>Object Detection in 20 Years: A Survey</p>
+</blockquote>
+<h3 id="传统目标检测（2014年前）："><a href="#传统目标检测（2014年前）：" class="headerlink" title="传统目标检测（2014年前）："></a>传统目标检测（2014年前）：</h3><ul>
+<li><p>Viola Jones Detectors<br>Integral image, Feature selection, Detection cascades</p>
+</li>
+<li><p>HOG Detector<br>scale-invariant feature transform</p>
+</li>
+<li><p>Deformable Part-based Model (DPM)<br>mixture models, hard negative mining, bounding box regression, etc.</p>
+</li>
+</ul>
+<h3 id="基于深度学习的目标检测："><a href="#基于深度学习的目标检测：" class="headerlink" title="基于深度学习的目标检测："></a>基于深度学习的目标检测：</h3><h4 id="Two-stage-Detectors"><a href="#Two-stage-Detectors" class="headerlink" title="Two-stage Detectors"></a>Two-stage Detectors</h4><ul>
+<li>RCNN<br>加入CNN</li>
+<li>SPPNet<br>生成固定表达的向量</li>
+<li>Fast RCNN<br>框回归集成</li>
+<li>Faster RCNN<br>Region Proposal Network (RPN)</li>
+<li>Feature Pyramid Networks</li>
+</ul>
+<h4 id="One-stage-Detectors"><a href="#One-stage-Detectors" class="headerlink" title="One-stage Detectors"></a>One-stage Detectors</h4><ul>
+<li>YOLO, v2, v3(R. Joseph)<br>边界框定位精度问题</li>
+<li>Single Shot MultiBox Detector (SSD)<br>加入了不同尺度层的信息</li>
+<li>RetinaNet<br>focal loss<blockquote>
+<p>They claimed that the extreme foreground-background class imbalance encountered during training of dense detectors is the central cause.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><ul>
+<li>Pascal VOC</li>
+<li>ILSVRC， 有更多的类别<code>200类</code></li>
+<li>MS-COCO, 包含更多的目标实例<code>80类</code></li>
+<li>Open Images, 更多的检测，又增加了物体相对关系的检测<code>600类</code></li>
+</ul>
+<h2 id="测度"><a href="#测度" class="headerlink" title="测度"></a>测度</h2><ul>
+<li>行人识别，false positives perimage(FPPI)</li>
+<li>目标识别，Average Precision (AP)；目标定位准确，IoU(&gt;0.5)</li>
+<li>粗定位结果IoU(&gt;0.5)，完美定位IoU(&gt;0.95)</li>
+</ul>
+<h2 id="Multi-reference-resolution-detection-after-2015"><a href="#Multi-reference-resolution-detection-after-2015" class="headerlink" title="Multi-reference/-resolution detection (after 2015)"></a>Multi-reference/-resolution detection (after 2015)</h2><blockquote>
+<p>Its main idea is to pre-define a set of reference boxes (a.k.a. anchor boxes) with different sizes and aspect-ratios at different locations of an image, and then predict the detection box based on these references.</p>
+</blockquote>
+<p>典型的损失包含，1）类别识别的交叉熵损失；2）L1 or L2 回归损失（边界框定位）</p>
+<h2 id="BB的演进"><a href="#BB的演进" class="headerlink" title="BB的演进"></a>BB的演进</h2><p>2013年后，采用的框盒预测是从特征到BB。为了更加鲁棒的预测，常采用smooth-L1 function或者root-square function。</p>
+<h2 id="考虑上下文环境"><a href="#考虑上下文环境" class="headerlink" title="考虑上下文环境"></a>考虑上下文环境</h2><blockquote>
+<p>Recent deep learning based detectors can also be improved with local context by simply enlarging the networks’ receptive field or the size of object proposals.</p>
+</blockquote>
+<ul>
+<li><p>对全局的背景信息可以采用增大足够大的感受野 或者 全局池化操作</p>
+</li>
+<li><p>认为全局上下文信息是一种序列信息，可以采用RNN来学习到</p>
+</li>
+<li><p>现在，一种趋势是获得物体间的相互依赖关系，用以提升准确率！！！</p>
+</li>
+</ul>
+<h2 id="Non-maximum-suppression-NMS"><a href="#Non-maximum-suppression-NMS" class="headerlink" title="Non-maximum suppression (NMS)"></a>Non-maximum suppression (NMS)</h2><blockquote>
+<p>the non-maximum suppression is herein used as a post-processing step to remove the replicated bounding boxes and obtain the final detection result.</p>
+</blockquote>
+<h2 id="Hard-Negative-Mining"><a href="#Hard-Negative-Mining" class="headerlink" title="Hard Negative Mining"></a>Hard Negative Mining</h2><blockquote>
+<p>Hard negative mining (HNM) aims to deal with the problem of imbalanced data during training.</p>
+</blockquote>
+<h3 id="一些技术"><a href="#一些技术" class="headerlink" title="一些技术"></a>一些技术</h3><ul>
+<li>Bootstrap，逐步添加数据进去 (first)</li>
+<li>weight-balancing，但是不能完全解决</li>
+<li>新的损失函数，改造了标准的交叉熵</li>
+</ul>
+<h2 id="feature-map-shared-computation"><a href="#feature-map-shared-computation" class="headerlink" title="feature map shared computation"></a>feature map shared computation</h2><p>典型的参见RNN系列</p>
+<h2 id="级联检测"><a href="#级联检测" class="headerlink" title="级联检测"></a>级联检测</h2><p>难度分级，如今应用在</p>
+<ul>
+<li>small objects in large scenes</li>
+</ul>
+<p>加速加成</p>
+<ul>
+<li>提高检测困难例子</li>
+<li>集成上下文信息</li>
+<li>提高定位准确率</li>
+</ul>
+<h2 id="Network-Pruning-and-Quantification"><a href="#Network-Pruning-and-Quantification" class="headerlink" title="Network Pruning and Quantification"></a>Network Pruning and Quantification</h2><p>除此以外，Network Distillation（教师网络，学生网络）</p>
+<h2 id="轻量化网络结构"><a href="#轻量化网络结构" class="headerlink" title="轻量化网络结构"></a>轻量化网络结构</h2><ul>
+<li>Factorizing Convolutions（叠加小卷积）</li>
+<li>Group Convolution - 分部分进行卷积，最后组合在一起</li>
+<li>Depth-wise Separable Convolution - 应用在目标检测和细粒度分类中</li>
+<li>Bottle-neck Design - 更为有表达性的信息编码</li>
+<li>NAS</li>
+</ul>
+<h2 id="数值加速方法"><a href="#数值加速方法" class="headerlink" title="数值加速方法"></a>数值加速方法</h2><ul>
+<li>Integral Image<blockquote>
+<p>The integral HOG map has been used in pedestrian detection and has achieved dozens of times’ acceleration without losing any accuracy</p>
+</blockquote>
+</li>
+<li>Frequency Domain<blockquote>
+<p>FFT加速</p>
+</blockquote>
+</li>
+<li>Vector Quantization (VQ)</li>
+<li>Reduced Rank Approximation</li>
+</ul>
+<p>(SENet采用特征加权的融合方法)</p>
+<h2 id="特征融合"><a href="#特征融合" class="headerlink" title="特征融合"></a>特征融合</h2><ul>
+<li>bottom-up fusion, (b) top-down fusion, (c) element-wise sum, (d) element-wise product, and (e) concatenation.</li>
+<li>fractional strided convolution for up-sampling</li>
+</ul>
+<p>关于空洞卷积的一些缘由：</p>
+<blockquote>
+<p>As we mentioned before, the lower the feature resolution is, the harder will be to detect small objects. The most straight forward way to increase the feature resolution is to remove pooling layer or to reduce the convolution downsampling rate. But this will cause a new problem, the receptive field will become too small due to the decreasingof output stride. In other words, this will narrow a detector’s ”sight” and may result in the miss detection of some large objects.<br>A piratical method to increase both of the receptive field and feature resolution at the same time is to introduce dilated convolution (a.k.a. atrous convolution, or convolution with holes). Dilated convolution is originally proposed in semantic segmentation tasks. Its main idea is to expand the convolution filter and use sparse parameters. For example, a 3x3 filter with a dilation rate of 2 will have the same receptive field as a 5x5 kernel but only have 9 parameters. Dilated convolution has now been widely used in object detection, and proves to be effective for improved accuracy without any additional parameters and computational cost.</p>
+</blockquote>
+<h2 id="滑动窗口之外"><a href="#滑动窗口之外" class="headerlink" title="滑动窗口之外"></a>滑动窗口之外</h2><ul>
+<li>Sub-region search，以路径规划理解</li>
+<li>key points localization<blockquote>
+<p>One recent implementation of this idea is to predict a heat-map for the corners.<br>The advantage of this approach is that it can be implemented under a semantic segmentation framework, and there is no need to design multi-scale anchor boxes.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="提高定位准确率"><a href="#提高定位准确率" class="headerlink" title="提高定位准确率"></a>提高定位准确率</h2><ul>
+<li>BB微调</li>
+<li>设计新的损失</li>
+</ul>
+<h2 id="在分割任务中学习"><a href="#在分割任务中学习" class="headerlink" title="在分割任务中学习"></a>在分割任务中学习</h2><blockquote>
+<p>Recent researches suggest object detection can be improved by learning with semantic segmentation.</p>
+</blockquote>
+<ul>
+<li>Edges and boundaries are the basic elements that constitute human visual cognition.</li>
+<li>The ground-truth bounding box of an object is determined by its well-defined boundary, learning with segmentation would be helpful for accurate object localization.</li>
+<li>Integrating the context of semantic segmentation will be helpful for object detection.</li>
+</ul>
+<h3 id="怎么样提升？"><a href="#怎么样提升？" class="headerlink" title="怎么样提升？"></a>怎么样提升？</h3><ul>
+<li>The simplest way is to think of the segmentation network as a fixed feature extractor and to integrate it into a detection framework as additional features</li>
+<li>Another way is to introduce an additional segmentation branch on top of the original detection framework and to train this model with multi-task loss functions (segmentation loss + detection loss). In most cases, the segmentation brunch will be removed at the inference stage. The advantage is the detection speed will not be affected, but the disadvantage is that the training requires pixel-level image annotations. To this end, some researchers have followed the idea of “weakly supervised learning”: instead of training based on pixel-wise annotation masks, they simply train the segmentation brunch based on the bounding-box level annotations.</li>
+</ul>
+<h2 id="对旋转和放缩鲁棒"><a href="#对旋转和放缩鲁棒" class="headerlink" title="对旋转和放缩鲁棒"></a>对旋转和放缩鲁棒</h2><h3 id="旋转鲁棒"><a href="#旋转鲁棒" class="headerlink" title="旋转鲁棒"></a>旋转鲁棒</h3><ul>
+<li>旋转不变的损失函数</li>
+<li>旋转校正 - Spatial Transformer Networks (STN) 用作文本检测任务的旋转校正</li>
+<li>旋转感兴趣区域的池化层<blockquote>
+<p>In a two-stage detector, feature pooling aims to extract a fixed length feature representation for an object proposal with any location and size by first dividing the proposal evenly into a set of grids, and then concatenating the grid features. As the grid meshing is performed in Cartesian coordinates, the features are not invariance to rotation transform. A recent improvement is to mesh the grids in polar coordinates so that the features could be robust to the rotation changes.</p>
+</blockquote>
+<h3 id="放缩鲁棒"><a href="#放缩鲁棒" class="headerlink" title="放缩鲁棒"></a>放缩鲁棒</h3></li>
+<li>简而言之就是因为图片上物体的检测难以覆盖全面，总会存在物体过小、过大检测不出的问题</li>
+<li>一是采用局部区域放缩</li>
+<li>“adaptive zoom-in” techniques</li>
+<li>Another recent improvement is learning to predict the scale distribution of objects in an image, and then adaptively re-scaling the image according to the distribution.</li>
+</ul>
+<h2 id="对抗自训练"><a href="#对抗自训练" class="headerlink" title="对抗自训练"></a>对抗自训练</h2><p>对比学习+拼图学习+相互关系<br>AMDIM 、CPC、Moco 、 Swav 、</p>
+<p>NCE 损失函数 -  SimCLR</p>
+<h2 id="采用训练模型存在的域适应是否匹配问题，是否会造成误匹配"><a href="#采用训练模型存在的域适应是否匹配问题，是否会造成误匹配" class="headerlink" title="采用训练模型存在的域适应是否匹配问题，是否会造成误匹配"></a>采用训练模型存在的域适应是否匹配问题，是否会造成误匹配</h2><h2 id="从零加速训练"><a href="#从零加速训练" class="headerlink" title="从零加速训练"></a>从零加速训练</h2><ul>
+<li>dense connection</li>
+<li>batch normalization<blockquote>
+<p>K. He等随机初始化的实验，证明了ImageNet的随机初始化预训练参数可以加速收敛，但不一定提供正则化或提高最终的检测精度。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="对抗训练"><a href="#对抗训练" class="headerlink" title="对抗训练"></a>对抗训练</h2><p>In recent two years, GAN has also been applied to object detection, especially for improving the detection of small and occluded object.</p>
+<p>对抗损失 or 域自适应</p>
+<h2 id="弱监督目标检测"><a href="#弱监督目标检测" class="headerlink" title="弱监督目标检测"></a>弱监督目标检测</h2><p>只要求要图片级别的标注。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>the deep CNN is no better than traditional methods for spectral data</p>
+<blockquote>
+<p>O. A. Penatti, K. Nogueira, and J. A. dos Santos, “Do deep features generalize from everyday objects to remote sensing and aerial scenes domains?” in Proceedings of the IEEE conference on computer vision and pattern recognition workshops, 2015, pp. 44–51.</p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E6%80%BB%E7%BB%93/">阅读总结</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">目标检测</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/">论文总结</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/09/29/AirSim-API/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">AirSim的api接口</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/27/%E6%97%A0%E4%BA%BA%E6%9C%BA-%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E9%9B%86/">
+                        <span class="hidden-mobile">无人机-视频检测数据集</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "o57aBHfOONpciuuoJUTn4EeX-gzGzoHsz",
+          app_key: "VTfEiC59AvlfytLzW8SQaOwv",
+          placeholder: "快来留言吧～",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "https://o57abhfo.lc-cn-n1-shared.com",
+        });
+      });
+    }
+    waitElementVisible('vcomments', loadValine);
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+
+<div>
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("09/23/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
+      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "目标检测20年【tracking】&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
